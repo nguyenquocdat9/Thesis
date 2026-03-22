@@ -1,0 +1,13 @@
+{
+  "nodes": [
+    { "name": "core_sw", "type": "core", "bw": 100000, "iops": 1000000, "u_type": "linear", "u_max": 0.9, "u_min": 0.1 },
+    { "name": "edge_sw_1", "type": "edge", "bw": 10000, "iops": 1000000, "u_type": "linear" },
+    { "name": "host_1", "type": "host", "pes": 16, "mips": 10000, "ram": 32768, "storage": 1000000, "bw": 10000 },
+    { "name": "host_2", "type": "host", "pes": 16, "mips": 10000, "ram": 32768, "storage": 1000000, "bw": 10000 }
+  ],
+  "links": [
+    { "source": "core_sw", "destination": "edge_sw_1", "latency": 2, "bw": 10000 },
+    { "source": "edge_sw_1", "destination": "host_1", "latency": 1, "bw": 1000 },
+    { "source": "edge_sw_1", "destination": "host_2", "latency": 1, "bw": 1000 }
+  ]
+}
