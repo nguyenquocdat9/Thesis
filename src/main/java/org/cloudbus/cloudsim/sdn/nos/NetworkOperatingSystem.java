@@ -155,7 +155,30 @@ public abstract class NetworkOperatingSystem extends SimEntity {
 				
 				this.updateBWMonitor(Configuration.monitoringTimeInterval);
 				this.updateHostMonitor(Configuration.monitoringTimeInterval);
-				this.updateSwitchMonitor(Configuration.monitoringTimeInterval);				
+				this.updateSwitchMonitor(Configuration.monitoringTimeInterval);
+
+				for (Object obj : getHostList()) {
+					// 1. Convert to host obj
+					org.cloudbus.cloudsim.Host host = (org.cloudbus.cloudsim.Host) obj;
+
+					// 2. Get Host MIPS
+					double totalMips = host.getTotalMips();
+
+					// 3. Get MIPS being distributed for VMs
+					// Hàm getAvailableMips() luôn tồn tại trong mọi bản CloudSim
+					double availableMips = host.getVmScheduler().getAvailableMips();
+					double usedMips = totalMips - availableMips;
+
+					// 4. Calculate Utilization
+					double util = usedMips / totalMips;
+
+					if (util > 0.8) {
+						// Get hostname to print on console
+						org.cloudbus.cloudsim.sdn.physicalcomponents.SDNHost sdnHost = (org.cloudbus.cloudsim.sdn.physicalcomponents.SDNHost) host;
+						System.out.println("[Scaling Trigger] Host " + sdnHost.getName() +
+								" overloading: " + String.format("%.2f", util * 100) + "% tại " + CloudSim.clock() + "s");
+					}
+				}
 				
 				if(CloudSim.clock() >= lastMigration + Configuration.migrationTimeInterval && this.datacenter != null) {
 					sfcScaler.scaleSFC();	// Start SFC Auto Scaling

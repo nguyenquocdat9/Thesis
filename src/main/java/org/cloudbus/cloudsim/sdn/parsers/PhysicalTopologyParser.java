@@ -155,16 +155,16 @@ public class PhysicalTopologyParser {
 					////////////////////////////////////////
 					// Host
 					////////////////////////////////////////
-					
-					long pes = (Long) node.get("pes");
-					long mips = (Long) node.get("mips");
-					int ram = new BigDecimal((Long)node.get("ram")).intValueExact();
-					long storage = (Long) node.get("storage");
-					long bw = new BigDecimal((Long)node.get("bw")).intValueExact();
+
+					long pes = Double.valueOf(node.get("pes").toString()).longValue();
+					long mips = Double.valueOf(node.get("mips").toString()).longValue();
+					int ram = new BigDecimal(Double.valueOf(node.get("ram").toString()).longValue()).intValueExact();
+					long storage = Double.valueOf(node.get("storage").toString()).longValue();
+					long bw = new BigDecimal(Double.valueOf(node.get("bw").toString()).longValue()).intValueExact();
 					
 					int num = 1;
 					if (node.get("nums")!= null)
-						num = new BigDecimal((Long)node.get("nums")).intValueExact();
+						num = new BigDecimal(Double.valueOf(node.get("nums").toString()).longValue()).intValueExact();
 
 					for(int n = 0; n< num; n++) {
 						String nodeName2 = nodeName;
@@ -184,8 +184,8 @@ public class PhysicalTopologyParser {
 					
 					int MAX_PORTS = 256;
 							
-					long bw = new BigDecimal((Long)node.get("bw")).longValueExact();
-					long iops = (Long) node.get("iops");
+					long bw = new BigDecimal(Double.valueOf(node.get("bw").toString()).longValue()).longValueExact();
+					long iops = Double.valueOf(node.get("iops").toString()).longValue();
 					int upports = MAX_PORTS;
 					int downports = MAX_PORTS;
 					if (node.get("upports")!= null)
@@ -234,7 +234,7 @@ public class PhysicalTopologyParser {
 				JSONObject link = linksIter.next();
 				String src = (String) link.get("source");  
 				String dst = (String) link.get("destination");
-				double lat = (Double) link.get("latency");
+				double lat = Double.parseDouble(link.get("latency").toString());
 				
 				Node srcNode = nameNodeTable.get(src);
 				Node dstNode = nameNodeTable.get(dst);
