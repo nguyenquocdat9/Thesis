@@ -1,19 +1,23 @@
 {
   "nodes": [
     { "name": "core", "type": "core", "bw": 100000, "iops": 100000, "datacenter": null },
-    { "name": "edge_1", "type": "edge", "bw": 10000, "iops": 50000, "datacenter": null },
-    { "name": "edge_2", "type": "edge", "bw": 10000, "iops": 50000, "datacenter": null },
-    { "name": "host_1", "type": "host", "mips": 100000, "pes": 8, "ram": 65536, "storage": 10000000, "bw": 10000, "datacenter": null },
-    { "name": "host_2", "type": "host", "mips": 100000, "pes": 8, "ram": 65536, "storage": 10000000, "bw": 10000, "datacenter": null },
-    { "name": "host_3", "type": "host", "mips": 100000, "pes": 8, "ram": 65536, "storage": 10000000, "bw": 10000, "datacenter": null },
-    { "name": "host_4", "type": "host", "mips": 100000, "pes": 8, "ram": 65536, "storage": 10000000, "bw": 10000, "datacenter": null }
+    { "name": "edge_1", "type": "edge", "bw": 20000, "iops": 50000, "datacenter": null },
+    { "name": "edge_2", "type": "edge", "bw": 20000, "iops": 50000, "datacenter": null },
+    { "name": "host_1", "type": "host", "mips": 80000, "pes": 8, "ram": 32768, "storage": 1000000, "bw": 10000, "datacenter": null },
+    { "name": "host_2", "type": "host", "mips": 80000, "pes": 8, "ram": 32768, "storage": 1000000, "bw": 10000, "datacenter": null },
+    { "name": "host_3", "type": "host", "mips": 80000, "pes": 8, "ram": 32768, "storage": 1000000, "bw": 10000, "datacenter": null },
+    { "name": "host_4", "type": "host", "mips": 80000, "pes": 8, "ram": 32768, "storage": 1000000, "bw": 10000, "datacenter": null },
+    { "name": "host_5", "type": "host", "mips": 80000, "pes": 8, "ram": 32768, "storage": 1000000, "bw": 10000, "datacenter": null },
+    { "name": "host_6", "type": "host", "mips": 80000, "pes": 8, "ram": 32768, "storage": 1000000, "bw": 10000, "datacenter": null }
   ],
   "links": [
     { "source": "core", "destination": "edge_1", "latency": 2 },
     { "source": "core", "destination": "edge_2", "latency": 2 },
     { "source": "edge_1", "destination": "host_1", "latency": 1 },
     { "source": "edge_1", "destination": "host_2", "latency": 1 },
-    { "source": "edge_2", "destination": "host_3", "latency": 1 },
-    { "source": "edge_2", "destination": "host_4", "latency": 1 }
+    { "source": "edge_1", "destination": "host_3", "latency": 1 },
+    { "source": "edge_2", "destination": "host_4", "latency": 1 },
+    { "source": "edge_2", "destination": "host_5", "latency": 1 },
+    { "source": "edge_2", "destination": "host_6", "latency": 1 }
   ]
 }

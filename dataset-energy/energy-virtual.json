@@ -1,21 +1,23 @@
 {
   "nodes": [
-    { "name": "SFC_Short", "type": "vm", "mips": 10000, "pes": 1, "ram": 1024, "size": 1000, "bw": 1000 },
-    { "name": "SFC_Medium", "type": "vm", "mips": 10000, "pes": 1, "ram": 1024, "size": 1000, "bw": 1000 },
-    { "name": "SFC_Long", "type": "vm", "mips": 10000, "pes": 1, "ram": 1024, "size": 1000, "bw": 1000 },
-    { "name": "Shared_FW", "type": "firewall", "mips": 20000, "pes": 1, "ram": 2048, "size": 1000, "bw": 1000, "mipoper": 10 },
-    { "name": "LB_VNF", "type": "loadbalancer", "mips": 15000, "pes": 1, "ram": 1024, "size": 1000, "bw": 1000, "mipoper": 5 },
-    { "name": "IDS_VNF", "type": "ids", "mips": 15000, "pes": 1, "ram": 1024, "size": 1000, "bw": 1000, "mipoper": 15 },
+    { "name": "Source_A", "type": "vm", "mips": 10000, "pes": 1, "ram": 1024, "size": 1000, "bw": 1000 },
+    { "name": "Source_B", "type": "vm", "mips": 10000, "pes": 1, "ram": 1024, "size": 1000, "bw": 1000 },
+    { "name": "Source_C", "type": "vm", "mips": 10000, "pes": 1, "ram": 1024, "size": 1000, "bw": 1000 },
+
+    { "name": "FW_Shared_AB", "type": "firewall", "mips": 15000, "pes": 1, "ram": 2048, "size": 1000, "bw": 1000, "mipoper": 20 },
+    { "name": "FW_Shared_BC", "type": "firewall", "mips": 15000, "pes": 1, "ram": 2048, "size": 1000, "bw": 1000, "mipoper": 20 },
+
+    { "name": "DPI_VNF", "type": "ids", "mips": 15000, "pes": 1, "ram": 1024, "size": 1000, "bw": 1000, "mipoper": 30 },
     { "name": "Web_Server", "type": "vm", "mips": 20000, "pes": 1, "ram": 4096, "size": 1000, "bw": 1000 }
   ],
   "links": [
-    { "name": "flow1", "source": "SFC_Short", "destination": "Web_Server", "bandwidth": 500, "latency": 0.1 },
-    { "name": "flow2", "source": "SFC_Medium", "destination": "Web_Server", "bandwidth": 500, "latency": 0.1 },
-    { "name": "flow3", "source": "SFC_Long", "destination": "Web_Server", "bandwidth": 500, "latency": 0.1 }
+    { "name": "f1", "source": "Source_A", "destination": "Web_Server", "bandwidth": 500, "latency": 0.1 },
+    { "name": "f2", "source": "Source_B", "destination": "Web_Server", "bandwidth": 500, "latency": 0.1 },
+    { "name": "f3", "source": "Source_C", "destination": "Web_Server", "bandwidth": 500, "latency": 0.1 }
   ],
   "policies": [
-    { "name": "SFC_Short", "source": "SFC_Short", "destination": "Web_Server", "flowname": "flow1", "sfc": ["Shared_FW"] },
-    { "name": "SFC_Medium", "source": "SFC_Medium", "destination": "Web_Server", "flowname": "flow2", "sfc": ["Shared_FW", "LB_VNF"] },
-    { "name": "SFC_Long", "source": "SFC_Long", "destination": "Web_Server", "flowname": "flow3", "sfc": ["Shared_FW", "IDS_VNF"] }
+    { "name": "SFC_A", "source": "Source_A", "destination": "Web_Server", "flowname": "f1", "sfc": ["FW_Shared_AB", "DPI_VNF"] },
+    { "name": "SFC_B", "source": "Source_B", "destination": "Web_Server", "flowname": "f2", "sfc": ["FW_Shared_AB", "FW_Shared_BC"] },
+    { "name": "SFC_C", "source": "Source_C", "destination": "Web_Server", "flowname": "f3", "sfc": ["FW_Shared_BC", "DPI_VNF"] }
   ]
 }
