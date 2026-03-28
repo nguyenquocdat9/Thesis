@@ -38,10 +38,8 @@ import java.util.*;
  */
 public class SimpleExample {
 	protected static String physicalTopologyFile = "dataset-energy/usnet_physical.json";
-	protected static String deploymentFile 		= "dataset-energy/energy-virtual.json";
-	protected static String [] workload_files 			= {
-		"dataset-energy/energy-workload.csv"
-		};
+	protected static String deploymentFile = "dataset-energy/energy-virtual.json";
+	protected static String [] workload_files = {"dataset-energy/energy-workload.csv"};
 	
 	protected static List<String> workloads;
 	

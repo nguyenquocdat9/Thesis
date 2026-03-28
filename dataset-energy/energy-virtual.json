@@ -1,8 +1,21 @@
 {
   "nodes": [
-    { "name": "web_vnf", "type": "vm", "mips": 1000, "pes": 1, "ram": 512, "bw": 1000, "size": 10000, "vmm": "Xen" },
-    { "name": "firewall_vnf", "type": "vm", "mips": 1000, "pes": 1, "ram": 512, "bw": 1000, "size": 10000, "vmm": "Xen" },
-    { "name": "db_vnf", "type": "vm", "mips": 1000, "pes": 1, "ram": 512, "bw": 1000, "size": 10000, "vmm": "Xen" }
+    { "name": "SFC_Short", "type": "vm", "mips": 10000, "pes": 1, "ram": 1024, "size": 1000, "bw": 1000 },
+    { "name": "SFC_Medium", "type": "vm", "mips": 10000, "pes": 1, "ram": 1024, "size": 1000, "bw": 1000 },
+    { "name": "SFC_Long", "type": "vm", "mips": 10000, "pes": 1, "ram": 1024, "size": 1000, "bw": 1000 },
+    { "name": "Shared_FW", "type": "firewall", "mips": 20000, "pes": 1, "ram": 2048, "size": 1000, "bw": 1000, "mipoper": 10 },
+    { "name": "LB_VNF", "type": "loadbalancer", "mips": 15000, "pes": 1, "ram": 1024, "size": 1000, "bw": 1000, "mipoper": 5 },
+    { "name": "IDS_VNF", "type": "ids", "mips": 15000, "pes": 1, "ram": 1024, "size": 1000, "bw": 1000, "mipoper": 15 },
+    { "name": "Web_Server", "type": "vm", "mips": 20000, "pes": 1, "ram": 4096, "size": 1000, "bw": 1000 }
   ],
-  "links": []
+  "links": [
+    { "name": "flow1", "source": "SFC_Short", "destination": "Web_Server", "bandwidth": 500, "latency": 0.1 },
+    { "name": "flow2", "source": "SFC_Medium", "destination": "Web_Server", "bandwidth": 500, "latency": 0.1 },
+    { "name": "flow3", "source": "SFC_Long", "destination": "Web_Server", "bandwidth": 500, "latency": 0.1 }
+  ],
+  "policies": [
+    { "name": "SFC_Short", "source": "SFC_Short", "destination": "Web_Server", "flowname": "flow1", "sfc": ["Shared_FW"] },
+    { "name": "SFC_Medium", "source": "SFC_Medium", "destination": "Web_Server", "flowname": "flow2", "sfc": ["Shared_FW", "LB_VNF"] },
+    { "name": "SFC_Long", "source": "SFC_Long", "destination": "Web_Server", "flowname": "flow3", "sfc": ["Shared_FW", "IDS_VNF"] }
+  ]
 }

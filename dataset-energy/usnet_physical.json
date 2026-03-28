@@ -1,24 +1,19 @@
 {
   "nodes": [
-    { "name": "SanFrancisco", "type": "core", "bw": 100000, "iops": 1000000 },
-    { "name": "LosAngeles", "type": "core", "bw": 100000, "iops": 1000000 },
-    { "name": "Chicago", "type": "core", "bw": 100000, "iops": 1000000 },
-    { "name": "NewYork", "type": "core", "bw": 100000, "iops": 1000000 },
-    { "name": "Dallas", "type": "core", "bw": 100000, "iops": 1000000 },
-    { "name": "Host_SF_1", "type": "host", "pes": 1, "mips": 1000, "ram": 32768, "storage": 1000000, "bw": 10000 },
-    { "name": "Host_LA_1", "type": "host", "pes": 1, "mips": 1000, "ram": 32768, "storage": 1000000, "bw": 10000 },
-    { "name": "Host_CH_1", "type": "host", "pes": 1, "mips": 1000, "ram": 32768, "storage": 1000000, "bw": 10000 },
-    { "name": "Host_NY_1", "type": "host", "pes": 1, "mips": 1000, "ram": 32768, "storage": 1000000, "bw": 10000 }
+    { "name": "core", "type": "core", "bw": 100000, "iops": 100000, "datacenter": null },
+    { "name": "edge_1", "type": "edge", "bw": 10000, "iops": 50000, "datacenter": null },
+    { "name": "edge_2", "type": "edge", "bw": 10000, "iops": 50000, "datacenter": null },
+    { "name": "host_1", "type": "host", "mips": 100000, "pes": 8, "ram": 65536, "storage": 10000000, "bw": 10000, "datacenter": null },
+    { "name": "host_2", "type": "host", "mips": 100000, "pes": 8, "ram": 65536, "storage": 10000000, "bw": 10000, "datacenter": null },
+    { "name": "host_3", "type": "host", "mips": 100000, "pes": 8, "ram": 65536, "storage": 10000000, "bw": 10000, "datacenter": null },
+    { "name": "host_4", "type": "host", "mips": 100000, "pes": 8, "ram": 65536, "storage": 10000000, "bw": 10000, "datacenter": null }
   ],
   "links": [
-    { "source": "SanFrancisco", "destination": "LosAngeles", "latency": 5.0, "bw": 40000.0 },
-    { "source": "SanFrancisco", "destination": "Chicago", "latency": 15.0, "bw": 40000.0 },
-    { "source": "LosAngeles", "destination": "Dallas", "latency": 10.0, "bw": 40000.0 },
-    { "source": "Chicago", "destination": "NewYork", "latency": 8.0, "bw": 40000.0 },
-    { "source": "Dallas", "destination": "NewYork", "latency": 12.0, "bw": 40000.0 },
-    { "source": "SanFrancisco", "destination": "Host_SF_1", "latency": 1.0, "bw": 10000.0 },
-    { "source": "LosAngeles", "destination": "Host_LA_1", "latency": 1.0, "bw": 10000.0 },
-    { "source": "Chicago", "destination": "Host_CH_1", "latency": 1.0, "bw": 10000.0 },
-    { "source": "NewYork", "destination": "Host_NY_1", "latency": 1.0, "bw": 10000.0 }
+    { "source": "core", "destination": "edge_1", "latency": 2 },
+    { "source": "core", "destination": "edge_2", "latency": 2 },
+    { "source": "edge_1", "destination": "host_1", "latency": 1 },
+    { "source": "edge_1", "destination": "host_2", "latency": 1 },
+    { "source": "edge_2", "destination": "host_3", "latency": 1 },
+    { "source": "edge_2", "destination": "host_4", "latency": 1 }
   ]
 }

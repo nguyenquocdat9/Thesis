@@ -1,0 +1,23 @@
+{
+  "vms": [
+    { "id": 0, "name": "FW_Shared", "mips": 1000, "ram": 1024 },
+    { "id": 1, "name": "LB_VNF", "mips": 1500, "ram": 2048 },
+    { "id": 2, "name": "IDS_VNF", "mips": 2000, "ram": 2048 },
+    { "id": 3, "name": "OPT_VNF", "mips": 1200, "ram": 1024 },
+    { "id": 4, "name": "WEB_VNF", "mips": 2500, "ram": 4096 }
+  ],
+  "sfc_paths": [
+    {
+      "name": "SFC_1_Node",
+      "chain": [0]
+    },
+    {
+      "name": "SFC_2_Nodes",
+      "chain": [0, 1]
+    },
+    {
+      "name": "SFC_4_Nodes",
+      "chain": [0, 2, 3, 4]
+    }
+  ]
+}
